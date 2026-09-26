@@ -1,0 +1,7 @@
+case_id,review_status,human_reason,final_decision
+C03,Edited,AI initially blamed a VLAN creation issue; show interfaces trunk proved VLAN 30 was not allowed on the trunk.,Human changed diagnosis to trunk allowed-list configuration.
+C10,Edited,AI suggested DHCP server failure; evidence showed the server was reachable and only VLAN 20 lacked DHCP relay.,Human corrected diagnosis to missing ip helper-address.
+C19,Rejected,AI suggested a generic routing issue; the evidence showed a guest ACL permitting internal RFC1918 traffic.,Human rejected AI diagnosis and identified guest isolation failure.
+C23,Edited,AI suggested DNS; evidence showed the public address reached the router but no static NAT mapping existed.,Human corrected diagnosis to missing port forwarding.
+C30,Edited,AI initially suggested a switch loop; ARP evidence showed one IP moving between two MAC addresses.,Human corrected diagnosis to duplicate IP.
+C27,Accepted,AI identified an administratively down interface and recommended checking show interfaces and no shutdown.,Human accepted diagnosis and verified the interface state.

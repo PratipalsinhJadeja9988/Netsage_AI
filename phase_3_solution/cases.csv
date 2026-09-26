@@ -1,0 +1,31 @@
+case_id,issue_type,symptom,evidence,expected_fault,osi_layer,concept,severity
+C01,VLAN,PC in VLAN 10 gets IP but cannot ping another VLAN,"PC has 192.168.10.10/24, gateway 192.168.10.1. Switch shows Fa0/1 in VLAN 10. Router has no subinterface for VLAN 10.",Missing inter-VLAN gateway/subinterface,3,VLAN,High
+C02,VLAN,PC cannot communicate with another PC in same VLAN,show vlan brief shows the access port assigned to VLAN 20 while the peer is in VLAN 10.,Wrong access VLAN,2,VLAN,Medium
+C03,VLAN,Trunk traffic for VLAN 30 fails,show interfaces trunk shows VLAN 30 is not allowed on the trunk.,VLAN 30 missing from trunk allowed list,2,VLAN,High
+C04,VLAN,New VLAN hosts have no connectivity,show vlan brief does not list VLAN 40.,VLAN 40 not created,2,VLAN,Medium
+C05,Gateway,PC receives IP but cannot reach local gateway,"PC: 192.168.20.20/24, gateway 192.168.30.1.",Default gateway is outside the PC subnet,3,Gateway,High
+C06,Gateway,Only one PC cannot reach remote networks,show ip route is correct; PC configuration shows mask 255.255.0.0 instead of 255.255.255.0.,Incorrect subnet mask on host,3,Gateway,Medium
+C07,Gateway,Hosts in subnet cannot reach router,Router G0/0 is 192.168.50.1/24 but the PCs use gateway 192.168.60.1.,Gateway mismatch,3,Gateway,High
+C08,DHCP,PC self-assigns 169.254.x.x address,show ip dhcp binding is empty and the DHCP pool is missing a network statement.,DHCP pool is incorrectly configured,3,DHCP,High
+C09,DHCP,"Some DHCP clients work, others do not",show ip dhcp pool shows 100% utilization.,DHCP address pool exhausted,3,DHCP,High
+C10,DHCP,Remote VLAN clients do not receive DHCP addresses,DHCP server is on VLAN 10; router subinterface for VLAN 20 lacks ip helper-address.,Missing DHCP relay,3,DHCP,High
+C11,DNS,IP ping works but hostname ping fails,ping 8.8.8.8 succeeds; nslookup for server.local fails; PC DNS is blank.,DNS server not configured on client,7,DNS,Medium
+C12,DNS,Internal names resolve to wrong server,show run on DNS service contains an incorrect A record for server.local.,Incorrect DNS A record,7,DNS,Medium
+C13,DNS,DNS server is unreachable,PC can ping gateway but cannot ping DNS server IP; ACL blocks UDP/TCP 53.,DNS traffic blocked by ACL,4,DNS,High
+C14,Routing,PC can reach gateway but not remote subnet,show ip route has no route for 10.20.0.0/16.,Missing route to remote network,3,Routing,High
+C15,Routing,Remote network is unreachable after topology change,show ip route shows a stale static route pointing to a removed next hop.,Invalid static route,3,Routing,High
+C16,Routing,OSPF neighbors do not form,show ip ospf neighbor is empty; interfaces are in different areas.,OSPF area mismatch,3,Routing,High
+C17,Routing,One direction of communication fails,"show ip route on R2 has route to 10.10.0.0/24, but R1 has no route back to 10.20.0.0/24.",Missing return route,3,Routing,High
+C18,ACL,Web server cannot be reached but ping works,show access-lists shows an ACL denying TCP port 80 from the client subnet.,ACL blocks HTTP,4,ACL,High
+C19,ACL,Guest users can access internal server,Guest ACL permits 10.0.0.0/8 instead of denying internal RFC1918 networks.,Overly permissive guest ACL,4,ACL,Critical
+C20,ACL,SSH access to router fails,show access-lists shows VTY ACL permits only 192.168.99.0/24; admin is in 192.168.10.0/24.,VTY ACL blocks administrator subnet,4,ACL,High
+C21,NAT,Inside host cannot reach internet,show ip nat translations is empty; inside interface is not marked ip nat inside.,NAT inside interface missing,3,NAT,High
+C22,NAT,Internet access works for one subnet only,show run shows NAT ACL matches 192.168.10.0/24 but users are in 192.168.20.0/24.,NAT ACL does not match client subnet,3,NAT,High
+C23,NAT,Port-forwarded web server is unreachable,show run lacks ip nat inside source static tcp mapping for port 80.,Missing static port-forward,3,NAT,High
+C24,Wireless,Wireless clients associate but cannot obtain IP,AP is connected to switch access port in VLAN 10 while wireless clients are mapped to VLAN 20.,Incorrect AP/switch VLAN mapping,2,Wireless,High
+C25,Wireless,Guest SSID can access corporate server,show vlan and ACL configuration places Guest SSID in the corporate VLAN.,Guest SSID mapped to corporate VLAN,2,Wireless,Critical
+C26,Wireless,Wireless client frequently disconnects,AP is configured on the same channel as a nearby AP; signal is weak.,RF channel/interference issue,1,Wireless,Medium
+C27,Interface,Router link is down,show interfaces g0/1 reports administratively down.,Interface is shutdown,1,Interface,High
+C28,Interface,Switch port shows down/down,show interfaces fa0/10 status reports notconnect; cable is not connected.,Physical link/cabling problem,1,Interface,High
+C29,Mask,Hosts can reach some addresses but not others,PC uses /16 while network design requires /24; ARP occurs for unintended local addresses.,Incorrect host subnet mask,3,Mask,Medium
+C30,Duplicate IP,Intermittent connectivity between two hosts,show arp shows the same IP associated with different MAC addresses at different times.,Duplicate IP address,2,Duplicate IP,Critical

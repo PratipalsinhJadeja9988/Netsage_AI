@@ -1,0 +1,302 @@
+[
+  {
+    "case_id": "C01",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C02",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C03",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C04",
+    "checks": [
+      [
+        "missing_vlan",
+        "FAIL",
+        "Required VLAN appears to be missing."
+      ]
+    ]
+  },
+  {
+    "case_id": "C05",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C06",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C07",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C08",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C09",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C10",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C11",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C12",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C13",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C14",
+    "checks": [
+      [
+        "missing_route",
+        "FAIL",
+        "Required route is absent."
+      ]
+    ]
+  },
+  {
+    "case_id": "C15",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C16",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C17",
+    "checks": [
+      [
+        "missing_route",
+        "FAIL",
+        "Required route is absent."
+      ]
+    ]
+  },
+  {
+    "case_id": "C18",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C19",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C20",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C21",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C22",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C23",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C24",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C25",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C26",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C27",
+    "checks": [
+      [
+        "interface_down",
+        "FAIL",
+        "Interface is administratively down."
+      ]
+    ]
+  },
+  {
+    "case_id": "C28",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C29",
+    "checks": [
+      [
+        "basic_checks",
+        "PASS",
+        "No deterministic fault matched; human/AI review required."
+      ]
+    ]
+  },
+  {
+    "case_id": "C30",
+    "checks": [
+      [
+        "duplicate_ip",
+        "FAIL",
+        "Duplicate IP evidence detected."
+      ]
+    ]
+  }
+]

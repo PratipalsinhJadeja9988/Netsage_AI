@@ -1,0 +1,482 @@
+[
+  {
+    "case_id": "C01",
+    "root_cause": "Missing inter-VLAN gateway/subinterface",
+    "confidence": "high",
+    "evidence": [
+      "PC has 192.168.10.10/24, gateway 192.168.10.1. Switch shows Fa0/1 in VLAN 10. Router has no subinterface for VLAN 10."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "VLAN"
+  },
+  {
+    "case_id": "C02",
+    "root_cause": "Wrong access VLAN",
+    "confidence": "high",
+    "evidence": [
+      "show vlan brief shows the access port assigned to VLAN 20 while the peer is in VLAN 10."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "2",
+    "concept": "VLAN"
+  },
+  {
+    "case_id": "C03",
+    "root_cause": "VLAN 30 missing from trunk allowed list",
+    "confidence": "high",
+    "evidence": [
+      "show interfaces trunk shows VLAN 30 is not allowed on the trunk."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "2",
+    "concept": "VLAN"
+  },
+  {
+    "case_id": "C04",
+    "root_cause": "VLAN 40 not created",
+    "confidence": "high",
+    "evidence": [
+      "show vlan brief does not list VLAN 40."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "2",
+    "concept": "VLAN"
+  },
+  {
+    "case_id": "C05",
+    "root_cause": "Default gateway is outside the PC subnet",
+    "confidence": "high",
+    "evidence": [
+      "PC: 192.168.20.20/24, gateway 192.168.30.1."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "Gateway"
+  },
+  {
+    "case_id": "C06",
+    "root_cause": "Incorrect subnet mask on host",
+    "confidence": "high",
+    "evidence": [
+      "show ip route is correct; PC configuration shows mask 255.255.0.0 instead of 255.255.255.0."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "Gateway"
+  },
+  {
+    "case_id": "C07",
+    "root_cause": "Gateway mismatch",
+    "confidence": "high",
+    "evidence": [
+      "Router G0/0 is 192.168.50.1/24 but the PCs use gateway 192.168.60.1."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "Gateway"
+  },
+  {
+    "case_id": "C08",
+    "root_cause": "DHCP pool is incorrectly configured",
+    "confidence": "high",
+    "evidence": [
+      "show ip dhcp binding is empty and the DHCP pool is missing a network statement."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "DHCP"
+  },
+  {
+    "case_id": "C09",
+    "root_cause": "DHCP address pool exhausted",
+    "confidence": "high",
+    "evidence": [
+      "show ip dhcp pool shows 100% utilization."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "DHCP"
+  },
+  {
+    "case_id": "C10",
+    "root_cause": "Missing DHCP relay",
+    "confidence": "high",
+    "evidence": [
+      "DHCP server is on VLAN 10; router subinterface for VLAN 20 lacks ip helper-address."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "DHCP"
+  },
+  {
+    "case_id": "C11",
+    "root_cause": "DNS server not configured on client",
+    "confidence": "high",
+    "evidence": [
+      "ping 8.8.8.8 succeeds; nslookup for server.local fails; PC DNS is blank."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "7",
+    "concept": "DNS"
+  },
+  {
+    "case_id": "C12",
+    "root_cause": "Incorrect DNS A record",
+    "confidence": "high",
+    "evidence": [
+      "show run on DNS service contains an incorrect A record for server.local."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "7",
+    "concept": "DNS"
+  },
+  {
+    "case_id": "C13",
+    "root_cause": "DNS traffic blocked by ACL",
+    "confidence": "high",
+    "evidence": [
+      "PC can ping gateway but cannot ping DNS server IP; ACL blocks UDP/TCP 53."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "4",
+    "concept": "DNS"
+  },
+  {
+    "case_id": "C14",
+    "root_cause": "Missing route to remote network",
+    "confidence": "high",
+    "evidence": [
+      "show ip route has no route for 10.20.0.0/16."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "Routing"
+  },
+  {
+    "case_id": "C15",
+    "root_cause": "Invalid static route",
+    "confidence": "high",
+    "evidence": [
+      "show ip route shows a stale static route pointing to a removed next hop."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "Routing"
+  },
+  {
+    "case_id": "C16",
+    "root_cause": "OSPF area mismatch",
+    "confidence": "high",
+    "evidence": [
+      "show ip ospf neighbor is empty; interfaces are in different areas."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "Routing"
+  },
+  {
+    "case_id": "C17",
+    "root_cause": "Missing return route",
+    "confidence": "high",
+    "evidence": [
+      "show ip route on R2 has route to 10.10.0.0/24, but R1 has no route back to 10.20.0.0/24."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "Routing"
+  },
+  {
+    "case_id": "C18",
+    "root_cause": "ACL blocks HTTP",
+    "confidence": "high",
+    "evidence": [
+      "show access-lists shows an ACL denying TCP port 80 from the client subnet."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "4",
+    "concept": "ACL"
+  },
+  {
+    "case_id": "C19",
+    "root_cause": "Overly permissive guest ACL",
+    "confidence": "high",
+    "evidence": [
+      "Guest ACL permits 10.0.0.0/8 instead of denying internal RFC1918 networks."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "4",
+    "concept": "ACL"
+  },
+  {
+    "case_id": "C20",
+    "root_cause": "VTY ACL blocks administrator subnet",
+    "confidence": "high",
+    "evidence": [
+      "show access-lists shows VTY ACL permits only 192.168.99.0/24; admin is in 192.168.10.0/24."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "4",
+    "concept": "ACL"
+  },
+  {
+    "case_id": "C21",
+    "root_cause": "NAT inside interface missing",
+    "confidence": "high",
+    "evidence": [
+      "show ip nat translations is empty; inside interface is not marked ip nat inside."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "NAT"
+  },
+  {
+    "case_id": "C22",
+    "root_cause": "NAT ACL does not match client subnet",
+    "confidence": "high",
+    "evidence": [
+      "show run shows NAT ACL matches 192.168.10.0/24 but users are in 192.168.20.0/24."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "NAT"
+  },
+  {
+    "case_id": "C23",
+    "root_cause": "Missing static port-forward",
+    "confidence": "high",
+    "evidence": [
+      "show run lacks ip nat inside source static tcp mapping for port 80."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "NAT"
+  },
+  {
+    "case_id": "C24",
+    "root_cause": "Incorrect AP/switch VLAN mapping",
+    "confidence": "high",
+    "evidence": [
+      "AP is connected to switch access port in VLAN 10 while wireless clients are mapped to VLAN 20."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "2",
+    "concept": "Wireless"
+  },
+  {
+    "case_id": "C25",
+    "root_cause": "Guest SSID mapped to corporate VLAN",
+    "confidence": "high",
+    "evidence": [
+      "show vlan and ACL configuration places Guest SSID in the corporate VLAN."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "2",
+    "concept": "Wireless"
+  },
+  {
+    "case_id": "C26",
+    "root_cause": "RF channel/interference issue",
+    "confidence": "high",
+    "evidence": [
+      "AP is configured on the same channel as a nearby AP; signal is weak."
+    ],
+    "next_command": "show running-config",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "1",
+    "concept": "Wireless"
+  },
+  {
+    "case_id": "C27",
+    "root_cause": "Interface is shutdown",
+    "confidence": "high",
+    "evidence": [
+      "show interfaces g0/1 reports administratively down."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "1",
+    "concept": "Interface"
+  },
+  {
+    "case_id": "C28",
+    "root_cause": "Physical link/cabling problem",
+    "confidence": "high",
+    "evidence": [
+      "show interfaces fa0/10 status reports notconnect; cable is not connected."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "1",
+    "concept": "Interface"
+  },
+  {
+    "case_id": "C29",
+    "root_cause": "Incorrect host subnet mask",
+    "confidence": "high",
+    "evidence": [
+      "PC uses /16 while network design requires /24; ARP occurs for unintended local addresses."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "3",
+    "concept": "Mask"
+  },
+  {
+    "case_id": "C30",
+    "root_cause": "Duplicate IP address",
+    "confidence": "high",
+    "evidence": [
+      "show arp shows the same IP associated with different MAC addresses at different times."
+    ],
+    "next_command": "show ip route",
+    "fix_steps": [
+      "Verify the configuration against the evidence.",
+      "Apply the minimum required correction only after human approval.",
+      "Re-test connectivity and capture verification evidence."
+    ],
+    "osi_layer": "2",
+    "concept": "Duplicate IP"
+  }
+]

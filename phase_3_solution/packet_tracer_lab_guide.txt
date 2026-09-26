@@ -1,0 +1,30 @@
+NETSAGE AI — PACKET TRACER DEMO LAB GUIDE
+
+Build this small demonstration in Cisco Packet Tracer and save it as:
+Name-College Name-AI.pkt
+
+Suggested topology:
+PC1 --- S1 --- R1 --- S2 --- Server1
+                         |
+                        PC2
+
+Suggested VLANs:
+VLAN 10 USERS: 192.168.10.0/24
+VLAN 20 SERVERS: 192.168.20.0/24
+VLAN 30 GUEST: 192.168.30.0/24
+
+Demo fault:
+1. Put PC1 in VLAN 30 but configure R1/S1 so VLAN 30 is not allowed on the trunk.
+2. Give PC1 192.168.30.10/24 and gateway 192.168.30.1.
+3. Verify with:
+   show vlan brief
+   show interfaces trunk
+   show ip interface brief
+   show ip route
+4. Capture the symptom and command output in the NetSage case.
+5. Diagnose: missing VLAN 30 on the trunk.
+6. Human reviewer marks the recommendation Accepted/Edited/Rejected.
+7. After approval, correct the trunk configuration and verify with ping.
+8. Save the Packet Tracer project as the required .pkt file.
+
+Do not submit this text file as a .pkt. Open/save the topology using Cisco Packet Tracer.

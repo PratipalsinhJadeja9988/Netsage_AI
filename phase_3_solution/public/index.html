@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NetSage AI — Cisco Lab AI Diagnostics & Responsible Oversight</title>
+  <meta name="description" content="AI-assisted Cisco network troubleshooting dashboard with deterministic rule checker and human-in-the-loop responsible AI review.">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-network-wired"></i>
+        </div>
+        <div class="brand-text">
+          <h1>NetSage AI</h1>
+          <p>Cisco AICTE VIP Phase 3 — Lab Troubleshooting & Oversight</p>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div class="status-pill online">
+          <span class="pulse-dot"></span>
+          <span id="server-status">Server Online (localhost:8000)</span>
+        </div>
+        <button class="btn btn-secondary btn-sm" id="btn-refresh">
+          <i class="fa-solid fa-rotate-right"></i> Refresh
+        </button>
+      </div>
+    </header>
+
+    <!-- Stats Dashboard Cards -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon icon-blue">
+          <i class="fa-solid fa-folder-open"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value" id="stat-total-cases">30</span>
+          <span class="stat-label">Total Lab Cases</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-amber">
+          <i class="fa-solid fa-microchip"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value" id="stat-rule-failures">5</span>
+          <span class="stat-label">Deterministic Faults</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-emerald">
+          <i class="fa-solid fa-brain"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value" id="stat-ai-diagnoses">30</span>
+          <span class="stat-label">AI Diagnostic Models</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-purple">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value" id="stat-human-reviews">6</span>
+          <span class="stat-label">Human Review Logs</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="tab-cases">
+        <i class="fa-solid fa-list-check"></i> Troubleshooting Cases
+      </button>
+      <button class="tab-btn" data-tab="tab-rules">
+        <i class="fa-solid fa-bolt"></i> Rule Checker Engine
+      </button>
+      <button class="tab-btn" data-tab="tab-ai">
+        <i class="fa-solid fa-robot"></i> AI Diagnosis Vault
+      </button>
+      <button class="tab-btn" data-tab="tab-responsible">
+        <i class="fa-solid fa-shield-halved"></i> Responsible AI Log
+      </button>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+
+      <!-- TAB 1: Troubleshooting Cases -->
+      <section class="tab-pane active" id="tab-cases">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="search-input" placeholder="Search case ID, symptom, or expected fault...">
+          </div>
+          
+          <div class="filter-group">
+            <select id="filter-type" class="form-select">
+              <option value="ALL">All Issue Types</option>
+              <option value="VLAN">VLAN</option>
+              <option value="Gateway">Gateway</option>
+              <option value="DHCP">DHCP</option>
+              <option value="DNS">DNS</option>
+              <option value="Routing">Routing</option>
+              <option value="ACL">ACL</option>
+              <option value="NAT">NAT</option>
+              <option value="Wireless">Wireless</option>
+            </select>
+
+            <select id="filter-severity" class="form-select">
+              <option value="ALL">All Severities</option>
+              <option value="Critical">Critical</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+
+            <select id="filter-osi" class="form-select">
+              <option value="ALL">All OSI Layers</option>
+              <option value="2">Layer 2 (Data Link)</option>
+              <option value="3">Layer 3 (Network)</option>
+              <option value="4">Layer 4 (Transport)</option>
+              <option value="7">Layer 7 (Application)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table" id="cases-table">
+            <thead>
+              <tr>
+                <th>Case ID</th>
+                <th>Issue Type</th>
+                <th>OSI Layer</th>
+                <th>Severity</th>
+                <th>Symptom</th>
+                <th>Expected Fault</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="cases-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB 2: Rule Checker Engine -->
+      <section class="tab-pane" id="tab-rules">
+        <div class="panel-header">
+          <div>
+            <h2><i class="fa-solid fa-bolt text-amber"></i> Deterministic Rule Checker</h2>
+            <p>Runs regex and rule matching for duplicate IPs, subnet masks, gateway mismatches, down interfaces, and missing routes/VLANs.</p>
+          </div>
+          <button class="btn btn-primary" id="btn-rerun-rules">
+            <i class="fa-solid fa-play"></i> Run All Rule Checks
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table" id="rules-table">
+            <thead>
+              <tr>
+                <th>Case ID</th>
+                <th>Rule Name</th>
+                <th>Check Status</th>
+                <th>Check Details & Evidence Match</th>
+              </tr>
+            </thead>
+            <tbody id="rules-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB 3: AI Diagnosis Vault -->
+      <section class="tab-pane" id="tab-ai">
+        <div class="panel-header">
+          <div>
+            <h2><i class="fa-solid fa-robot text-indigo"></i> AI Diagnosis & IOS Recommendations</h2>
+            <p>Pre-calculated AI diagnoses generated with structured JSON schema prompting.</p>
+          </div>
+        </div>
+
+        <div class="cards-grid" id="ai-cards-container">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+
+      <!-- TAB 4: Responsible AI Oversight Log -->
+      <section class="tab-pane" id="tab-responsible">
+        <div class="panel-header">
+          <div>
+            <h2><i class="fa-solid fa-shield-halved text-emerald"></i> Responsible AI Audit & Oversight Log</h2>
+            <p>Mandatory human review records enforcing human-in-the-loop approval before executing Cisco configuration changes.</p>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table" id="log-table">
+            <thead>
+              <tr>
+                <th>Case ID</th>
+                <th>Review Status</th>
+                <th>Human Rationale / Evidence Review</th>
+                <th>Final Decision</th>
+              </tr>
+            </thead>
+            <tbody id="log-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Detail & Review Modal -->
+  <div class="modal-overlay" id="case-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="badge badge-primary" id="modal-case-id">C01</span>
+          <h2 id="modal-case-title">Case Details</h2>
+        </div>
+        <div class="modal-badges" id="modal-badges">
+          <!-- Badges -->
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="detail-section">
+          <h3><i class="fa-solid fa-triangle-exclamation text-amber"></i> Symptom</h3>
+          <p id="modal-symptom" class="text-lead"></p>
+        </div>
+
+        <div class="detail-section">
+          <h3><i class="fa-solid fa-terminal text-cyan"></i> Lab Evidence</h3>
+          <pre class="terminal-box" id="modal-evidence"></pre>
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-box">
+            <h4>Expected Fault</h4>
+            <p id="modal-expected-fault" class="font-bold"></p>
+          </div>
+          <div class="detail-box">
+            <h4>Rule Checker Result</h4>
+            <div id="modal-rule-result"></div>
+          </div>
+        </div>
+
+        <!-- AI Recommendation Box -->
+        <div class="ai-box">
+          <div class="ai-box-header">
+            <h3><i class="fa-solid fa-brain"></i> AI Diagnosis Recommendation</h3>
+            <span class="badge badge-info" id="modal-ai-confidence">High Confidence</span>
+          </div>
+          <div class="ai-box-body">
+            <p><strong>Root Cause:</strong> <span id="modal-ai-rootcause"></span></p>
+            <p><strong>Suggested Command:</strong> <code id="modal-ai-command"></code></p>
+            <div style="margin-top: 10px;">
+              <strong>Fix Steps:</strong>
+              <ul id="modal-ai-fixsteps"></ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Responsible AI Action Form -->
+        <form id="review-form" class="review-form">
+          <h3><i class="fa-solid fa-user-shield text-emerald"></i> Human Review Oversight Protocol</h3>
+          <p class="text-sm text-muted">AI recommendations cannot modify configuration automatically. You must approve, edit, or reject the diagnosis.</p>
+
+          <div class="form-group">
+            <label for="review-status">Review Decision</label>
+            <select id="review-status" class="form-select" required>
+              <option value="Accepted">Accepted — AI diagnosis is accurate</option>
+              <option value="Edited">Edited — Corrected AI diagnosis</option>
+              <option value="Rejected">Rejected — AI diagnosis incorrect or invalid</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="human-reason">Human Rationale / Verification Notes</label>
+            <textarea id="human-reason" class="form-textarea" rows="3" placeholder="Provide evidence analysis or justification for accepting/editing/rejecting..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="final-decision">Final Configuration Action</label>
+            <input type="text" id="final-decision" class="form-input" placeholder="e.g. Applied interface GigabitEthernet0/1 no shutdown." required>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
+            <button type="submit" class="btn btn-emerald">
+              <i class="fa-solid fa-check"></i> Submit Human Review
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
